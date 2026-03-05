@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 function SelectedMovie() {
   const [movie, setMovie] = useState({});
   const path = window.location.pathname.split("/").filter(Boolean).at(-1);
-  console.log(path);
-
   useEffect(() => {
     async function fetchData() {
       try {
