@@ -1,8 +1,12 @@
 import axios from "axios";
 import MovieCard from "./MovieCard";
+// import { useMovies } from "../../states/movies";
 import { useState, useEffect } from "react";
 
 function Movies() {
+  // const loadMovies = useMovies()
+  // console.log(loadMovies.movies);
+
   const [movies, setMovies] = useState([]);
   const [filter, setFilter] = useState("all");
 
@@ -11,23 +15,21 @@ function Movies() {
       try {
         const response = await axios.get("http://localhost:3000/api/movies");
         setMovies(response.data.movies);
-        console.log(response);
       } catch (error) {
         console.error("Fetch failed:", error);
       }
-      console.log(movies);
     }
     fetchData();
   }, []);
 
   return (
     <div>
-      <ul>
-        <input
-          type="text"
-          placeholder="Search the Name or the Genre"
-          onChange={(e) => setFilter(e.target.value)}
-        />
+      <input
+        type="text"
+        placeholder="Search the Name or the Genre"
+        onChange={(e) => setFilter(e.target.value)}
+      />
+      <div className="container">
         {movies
           .filter(
             (movie) =>
@@ -36,7 +38,7 @@ function Movies() {
               filter == "all",
           )
           .map((movie) => (
-            <li key={movie.imdbID}>
+            <div key={movie.imdbID}>
               <MovieCard
                 id={movie.imdbID}
                 image={movie.Images}
@@ -46,9 +48,9 @@ function Movies() {
                 genre={movie.Genre}
                 language={movie.Language}
               />
-            </li>
+            </div>
           ))}
-      </ul>
+      </div>
     </div>
   );
 }

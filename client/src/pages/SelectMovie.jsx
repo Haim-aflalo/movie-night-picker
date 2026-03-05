@@ -1,9 +1,7 @@
-
+import SelectedMovie from "../components/SelectedMovie";
 
 function SelectMovie() {
-  return (
-    <div>SelectMovie</div>
-  )
+  return <SelectedMovie></SelectedMovie>;
 }
 
-export default SelectMovie
+export default SelectMovie;
